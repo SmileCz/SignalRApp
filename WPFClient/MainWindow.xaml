@@ -1,0 +1,32 @@
+﻿<Window x:Class="WPFClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" FontSize="18"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="OpenConnection" Grid.Row="0" HorizontalAlignment="Center" Padding="20 10" Margin="20"
+                Click="OpenConnection_OnClick">
+            Open Connection
+        </Button>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+            <TextBox x:Name="messageInput" MinWidth="300" Margin="20" />
+            <Button x:Name="sendMessage" Padding="20 10" Margin="20" IsEnabled="false" Click="SendMessage_OnClick">
+                Send Message
+            </Button>
+        </StackPanel>
+        <ScrollViewer Grid.Row="2" Margin="20" MaxHeight="200" VerticalScrollBarVisibility="Auto" >
+            <ListBox x:Name="messages" HorizontalAlignment="Stretch" Padding="20 10" BorderThickness="0" ></ListBox>
+        </ScrollViewer>
+        
+    </Grid>
+</Window>

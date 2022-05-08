@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServer", "BlazorServer\BlazorServer.csproj", "{947AFBB2-0EEE-4391-9014-3A8AE380F179}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFClient", "WPFClient\WPFClient.csproj", "{C708DB4B-7ED1-493E-99FF-6861E01E31FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{947AFBB2-0EEE-4391-9014-3A8AE380F179}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{947AFBB2-0EEE-4391-9014-3A8AE380F179}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{947AFBB2-0EEE-4391-9014-3A8AE380F179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C708DB4B-7ED1-493E-99FF-6861E01E31FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C708DB4B-7ED1-493E-99FF-6861E01E31FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C708DB4B-7ED1-493E-99FF-6861E01E31FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C708DB4B-7ED1-493E-99FF-6861E01E31FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
