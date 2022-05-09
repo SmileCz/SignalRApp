@@ -1,25 +1,30 @@
 ﻿using System.Windows;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace WPFClient;
 
 public partial class MainWindow : Window
 {
-    private HubConnection _connection;
+    private HubConnection _chatConnection;
+    private HubConnection _counterConnection;
 
     public MainWindow()
     {
         InitializeComponent();
 
-        _connection = new HubConnectionBuilder()
+        _chatConnection = new HubConnectionBuilder()
             .WithUrl("https://localhost:7224/chathub")
             .WithAutomaticReconnect()
             .Build();
+        
+        _counterConnection = new HubConnectionBuilder()
+            .WithUrl("https://localhost:7224/counterhub")
+            .WithAutomaticReconnect()
+            .Build();
 
-        _connection.Reconnecting += (sender) =>
+        _chatConnection.Reconnecting += (sender) =>
         {
             Dispatcher.Invoke(() =>
             {
@@ -30,7 +35,7 @@ public partial class MainWindow : Window
             return Task.CompletedTask;
         };
         
-        _connection.Reconnected += (sender) =>
+        _chatConnection.Reconnected += (sender) =>
         {
             Dispatcher.Invoke(() =>
             {
@@ -42,7 +47,7 @@ public partial class MainWindow : Window
             return Task.CompletedTask;
         };
         
-        _connection.Closed += (sender) =>
+        _chatConnection.Closed += (sender) =>
         {
             Dispatcher.Invoke(() =>
             {
@@ -59,7 +64,7 @@ public partial class MainWindow : Window
 
     private async void OpenConnection_OnClick(object sender, RoutedEventArgs e)
     {
-        _connection.On<string, string>("ReceiveMessage", (user, message) =>
+        _chatConnection.On<string, string>("ReceiveMessage", (user, message) =>
         {
             Dispatcher.Invoke(() =>
             {
@@ -70,7 +75,7 @@ public partial class MainWindow : Window
 
         try
         {
-            await _connection.StartAsync();
+            await _chatConnection.StartAsync();
             messages.Items.Add("Connection Started");
             OpenConnection.IsEnabled = false;
             sendMessage.IsEnabled = true;
@@ -86,7 +91,7 @@ public partial class MainWindow : Window
     {
         try
         {
-            await _connection.InvokeAsync("SendMessage", "WPF Client", messageInput.Text);
+            await _chatConnection.InvokeAsync("SendMessage", "WPF Client", messageInput.Text);
         }
         catch (Exception ex)
         {
@@ -94,4 +99,30 @@ public partial class MainWindow : Window
         }
     
 }
+
+    private async void OpenCounter_OnClick(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            await _counterConnection.StartAsync();
+            OpenCounter.IsEnabled = false;
+            IncrementCounter.IsEnabled = true;
+        }
+        catch (Exception ex)
+        {
+            messages.Items.Add(ex.Message);
+        }
+    }
+
+    private async void IncrementCounter_OnClick(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            await _counterConnection.InvokeAsync("AddToTotal", "WPF Client", 1);
+        }
+        catch (Exception ex)
+        {
+            messages.Items.Add(ex.Message); 
+        }
+    }
 }

@@ -28,5 +28,10 @@
             <ListBox x:Name="messages" HorizontalAlignment="Stretch" Padding="20 10" BorderThickness="0" ></ListBox>
         </ScrollViewer>
         
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="OpenCounter" Padding="20 10" Margin="20" Click="OpenCounter_OnClick" IsEnabled="True">Open Counter Connection</Button>
+            <Button x:Name="IncrementCounter" Padding="20 10" Margin="20 " Click="IncrementCounter_OnClick" IsEnabled="False">Increment Counter</Button>
+        </StackPanel>
+        
     </Grid>
 </Window>
